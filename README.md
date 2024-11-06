@@ -1,13 +1,13 @@
 # React
-### Values:
+### Displaying Data
 ```react
 function App() {
   const name = 'Durga';
   const x = 10;
   const y = 1;
   return (
-    <div className='bg-primary text-customGray p-18 w-custom h-custom'>
-      <h1 className='text-5xl'>Hello {name} </h1>
+    <div>
+      <h1>Hello {name} </h1>
       <h2>Sum is : {x+y}</h2>
     </div>
   );
@@ -16,7 +16,6 @@ function App() {
 export default App;
 ```
 - we declare a variable or a value above the return statement and use by the {} this bracket it also do the arithmetic operation like x+y.
-### List of Names:
 ```react
 function App() {
   const names = ['Durga','Devi','DD','elan','Prakatheesh'];
@@ -35,51 +34,62 @@ function App() {
 export default App;
 ```
 - We use to print the list of elements then using the js map of function we return the li tag to the unordered list.
-### Ternary operator
-```react
+### Conditional Rendering
+In React, there is no special syntax for writing conditions. Instead, you’ll use the same techniques as you use when writing regular JavaScript code. For example, you can use an if statement to conditionally include JSX:
+```jsx
+import TrueComponent from "./Components/TrueComponent";
+import FalseComponent from "./Components/FalseComponent";
 function App() {
-  const names = ['Durga','Devi','DD','elan','Prakatheesh'];
-  const log = false;
+  
+  let content;
+  let loggedIn = false;
+  
+  if(loggedIn)
+  {
+    content = <TrueComponent />
+  }
+  else
+  {
+    content = <FalseComponent />
+  }
   return (
-    <div className='bg-primary text-customGray p-18 w-custom h-custom'>
-      <h1 className='text-5xl'>Hello</h1>
-      <ul>
-        {names.map((name)=>(
-          <li>{name}</li>
-        ))}
-      </ul>
-      { log ? <h1>Hello</h1> : <h1>Welcome</h1> }
-    </div>
+    <div>{ content }</div>
   );
 }
 
 export default App;
 ```
--  { log && <h1>Hello</h1>} without else part (:)
--  We add css property in inline inside the tag style = {{}} inside of the double bracket add the css like color font size.
-- Example : <ul style = {{color:'burlywood', fontSize:'50px', fontWeight:'1000', fontStyle:'revert-layer'}}>
-### style as a variable
-```react
+- In this code we use the conditional statement We import two components to App.jsx file
+- And fixed the loggedIn by false so check the loggedIn value if it is true content will store the truecomponent otherwise it will store the false component.
+- Finally we return the content with {} because it is dynamic value.
+- in this case content will store the component.
+We Also Use the single Line
+```jsx
+ <div>
+    { loggedIn ?(<TrueComponent />) : (<FalseComponent />) }
+</div>
+```
+Dont Need of else part
+```jsx
+<div>
+  { LoggedIn && <AdminPanel />}
+</div>
+```
+### Rendering List
+```jsx
 function App() {
-  const names = ['Durga','Devi','DD','elan','Prakatheesh'];
-  const log = true;
+  const list = ['Durga','Devi','Devi Devi'];
 
-  const styles = {
-    color:'burlywood',
-    fontSize:'50px',
-  }
+  const list_li = list.map((ele)=>
+    <button>{ele}</button>
+  )
   return (
-    <div className='color:red'>
-      <h1 className='text-5xl'>Hello</h1>
-      <ul style = {styles}>
-        {names.map((name)=>(
-          <li>{name}</li>
-        ))}
-      </ul>
-      { log && <h1>Hello</h1> }
+    <div>
+      <ul> {list_li} </ul>
     </div>
   );
 }
+export default App;
 ```
-- In this code  we create a element called styles and append our need.
-- Then when we need that thal time we put the name inside of the curly bracket.
+- In this code list of element
+- We return the unordered list. So using the map function we create a array of list and return it to the unordered list.
