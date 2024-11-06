@@ -55,6 +55,31 @@ function App() {
 
 export default App;
 ```
--  { log && <h1>Hello</h1> } without else part (:)
+-  { log && <h1>Hello</h1>} without else part (:)
 -  We add css property in inline inside the tag style = {{}} inside of the double bracket add the css like color font size.
 - Example : <ul style = {{color:'burlywood', fontSize:'50px', fontWeight:'1000', fontStyle:'revert-layer'}}>
+### style as a variable
+```react
+function App() {
+  const names = ['Durga','Devi','DD','elan','Prakatheesh'];
+  const log = true;
+
+  const styles = {
+    color:'burlywood',
+    fontSize:'50px',
+  }
+  return (
+    <div className='color:red'>
+      <h1 className='text-5xl'>Hello</h1>
+      <ul style = {styles}>
+        {names.map((name)=>(
+          <li>{name}</li>
+        ))}
+      </ul>
+      { log && <h1>Hello</h1> }
+    </div>
+  );
+}
+```
+- In this code  we create a element called styles and append our need.
+- Then when we need that thal time we put the name inside of the curly bracket.
