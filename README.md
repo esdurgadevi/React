@@ -93,3 +93,72 @@ export default App;
 ```
 - In this code list of element
 - We return the unordered list. So using the map function we create a array of list and return it to the unordered list.
+```jsx
+function App()
+{
+  const products = ["Durga","Devi","DD","ES","esdurga"];
+  const ListItems = products.map(product=>
+     <li>{product}</li>
+  )
+  return(
+    <ul>{ListItems}</ul>
+  )
+
+}
+
+export default App;
+```
+- In this code we render the list of element.
+- So how we acheive is to declare a list of elements named products.
+- Then in the return statement we return the unorderd list that unordered list will have the list of elements.
+- That list will get from the list of elements we already declare.
+- So create the the element called ListItems that will get the each product from the products list that product will convert it into list using <li></li>
+We also form like the below one
+```jsx
+
+function App()
+{
+  const products = [
+    {id:1,head:"Durga"},
+    {id:2,head:"Devi"},
+    {id:3,head:"Dd"},
+    {id:4,head:"esDurga"},
+    {id:5,head:"ES"},
+  ];
+  const ListItems = products.map(product=>
+     <li>{product.head}{product.id}</li>
+  )
+  return(
+    <ul>{ListItems}</ul>
+  )
+
+}
+
+export default App;
+```
+### UseState
+```jsx
+import React from "react";
+import { useState } from 'react'
+function App()
+{
+  const [name , setName] = useState('Durga');
+  function change()
+  {
+     setName('Devi');
+  }
+  return(
+    <div>
+      <h1>Hello.....{name} !</h1>
+      <button onClick = {change}>Click me</button>
+    </div>
+  )
+}
+
+export default App;
+```
+- In this code we use use state to handle the event.
+- First we declare a usestate variable that is const [name , setName] = usestate('durga') the durga is the initial usestate value.
+- If we click the button that button will call the function change() that function will set the name as devi.
+- We coutn the button click also.
+- Whenever we click the button the comopnent will re-render with the new name value that is setName of value.
