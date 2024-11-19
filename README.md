@@ -162,3 +162,22 @@ export default App;
 - If we click the button that button will call the function change() that function will set the name as devi.
 - We coutn the button click also.
 - Whenever we click the button the comopnent will re-render with the new name value that is setName of value.
+### UseEffect
+- Use effect is a react Hook.
+- Use Effect function will call every rendering.
+```jsx
+  useEffect(() => {
+        console.log('UseEffect1');
+    },[]);
+```
+- In the above function we will inspect the page the useeffect1 will print the first time that is the initial time the component will render so whenever the component is render the useffect function will run.
+- When we make any changes in the component that is delete the blog like that did not show any thing the first render only show.
+### useEffect Dependies
+```jsx
+  useEffect(() => {
+        console.log('UseEffect1');
+    },[console.log('UseEffect2')]);
+```
+- In this code whenever we delete the blog or we make any changes in the componenet that time useEffect2 will run.
+- Whenever the component run the dependency will print then the useeffect2 will print when we delete the blog that time useeffect2 will run.
+- The conclusion is **Inside the useEffect function runs only ones that is the initial rendering of the component but the outside the dependencies run every component change** 
