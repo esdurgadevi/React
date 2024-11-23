@@ -1,6 +1,6 @@
 # React
 ### Displaying Data
-```react
+```jsx
 function App() {
   const name = 'Durga';
   const x = 10;
@@ -16,7 +16,7 @@ function App() {
 export default App;
 ```
 - we declare a variable or a value above the return statement and use by the {} this bracket it also do the arithmetic operation like x+y.
-```react
+```jsx
 function App() {
   const names = ['Durga','Devi','DD','elan','Prakatheesh'];
   return (
@@ -180,4 +180,106 @@ export default App;
 ```
 - In this code whenever we delete the blog or we make any changes in the componenet that time useEffect2 will run.
 - Whenever the component run the dependency will print then the useeffect2 will print when we delete the blog that time useeffect2 will run.
-- The conclusion is **Inside the useEffect function runs only ones that is the initial rendering of the component but the outside the dependencies run every component change** 
+- The conclusion is **Inside the useEffect function runs only ones that is the initial rendering of the component but the outside the dependencies run every component change**
+### UseEffect:
+#### asynchronus operation:
+-An asynchronous operation in computing refers to a process that occurs independently of the main program flow. Rather than waiting for the operation to complete before moving on to the next task, the main program continues to run and handles the results when the operation is finished. This is particularly useful for tasks that take some time to complete, such as fetching data from the internet, reading from a file, or interacting with a database.
+**Key Features of Asynchronous Operations:**
+- Non-Blocking: The main program doesn't stop or wait for the asynchronous operation to complete. Instead, it can continue executing other tasks, which makes the program more efficient and responsive.
+- Concurrency: Allows multiple operations to be executed simultaneously, improving performance, especially in applications that involve I/O-bound tasks.
+- Callbacks, Promises, and Async/Await: Common mechanisms to handle asynchronous operations in JavaScript and other languages.
+Example
+```jsx
+// Asynchronous function using async/await
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data'); // Asynchronous operation
+    const data = await response.json(); // Waits for response to be parsed
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchData(); // Function call
+```
+**Our Program**
+```jsx
+useEffect(() => {
+        fetch('http://localhost:8000/blogs')
+        .then(res =>{
+            return res.json();
+        })
+        .then((data) => {
+            console.log(data);
+        })
+    },[]);
+```
+First when the swebsite run behind the scene it will fetch the data from the json server that is our local json server that will give the response so we get the response and then print the data. In this [] array is a dependency so that will run only once.
+- Inside the then function using the setBlogs method data will assigned but we blindly do that the error will occur because in the initialization of the use state we pass the null value
+```jsx
+const [blogs , setBlogs] = useState(null);
+```
+So after that it will immediatly try to map the blogs using map function beacuse we pass the blogs data as a props so it will try to map like the below code
+```jsx
+function BlogList(props)
+{
+    const blogs = props.blogs;
+    const title = props.title;
+    return(
+    <div className="blog-list">
+      <h1>{ title }</h1>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{ blog.title }</h2>
+          <p> Written By {blog.author} </p>
+          <h4> { blog.body } </h4>
+          <button onClick = {()=>props.Delete(blog.id)}>Delete Blog</button>
+        </div>
+      ))}
+    </div>
+    )
+}
+```
+- So it will produce a error we prevent this we load the data only if the blogs have not the null value using the below code
+```jsx
+ {blogs && <BlogList blogs={blogs} title={"All Blogs!"} Delete={Delete} />}
+```
+- This line error freely run it will check and then run. This is called conditional template. the && will evaluate the lett that is true then do the right side.
+One Important Note:
+- If we use setTimeout function that will not stop the entire program that will stop inside of the block the after blocks are continously run.
+Example:
+```jsx
+const [blogs , setBlogs] = useState(null);
+    useEffect(() => {
+        fetch('http://localhost:8000/blogs')
+        .then(res =>{
+            return res.json();
+        })
+        .then((data) =>{
+            setTimeout(() => { setPending(false); }, 3000);
+            setBlogs(data);
+        })
+    },[]);
+    return(
+        <div>
+            {pending && <h1>loading...</h1>}
+            {blogs && <BlogList blogs={blogs} title={"All Blogs!"} Delete={Delete} />}
+        </div>
+    )
+```
+- In the above code inside the use effect function we fetch the data and store the data after the setTimeout function so that the function will wait for 3 seconds.
+- But the becoming function not wait for any one it will continously run and assign the data value using the setBlogs function in the return function loading message will shown untill the pending will false but the pending will stop after 3 seconds.
+- And the blog will show when the data to be initialized that is not null.
+- so in the web page both are shown load will gone after the 3 seconds.
+![image](https://github.com/user-attachments/assets/6d8fd4a0-d3a3-479a-a93b-ace103a5cc77)
+- But incase of we use the conditional rendering that is when the pending is true that is load will gone that time blog will display like 3 seconds loading and then blogs.
+```jsx
+{pending ? ( <p>Loading...</p> ) : ( <BlogList blogs={blogs} title={"All Blogs!"} Delete={Delete} />)}
+```
+[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/hqdefault.jpg)](https://github.com/user-attachments/assets/3a7e5edc-0509-45ed-b201-a5dbc7454a0b)
+- Other wise we fetch the data inside the setTimeout function.
+### Eroor Handling
+- We handle the error like if the data is not availbale or else the data base or the server is not availbale that time we found an error
+- So what we do is catch the error and print the error message
+
