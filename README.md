@@ -282,4 +282,9 @@ const [blogs , setBlogs] = useState(null);
 ### Eroor Handling
 - We handle the error like if the data is not availbale or else the data base or the server is not availbale that time we found an error
 - So what we do is catch the error and print the error message
-
+### Response
+- When we fetch the data the response will return.
+- The response is ok that means the fetching is successfull. That is data fetched successfully.
+<br>
+![image](https://github.com/user-attachments/assets/af0fddf3-63ad-404c-94c9-3b7ec9609aa8)
+- In this image we see the responses it have the url of our local json server and the ok tag that is true means fetching data successfull false means fetching data not successfull.
