@@ -288,3 +288,45 @@ const [blogs , setBlogs] = useState(null);
 <br>
 ![image](https://github.com/user-attachments/assets/af0fddf3-63ad-404c-94c9-3b7ec9609aa8)
 - In this image we see the responses it have the url of our local json server and the ok tag that is true means fetching data successfull false means fetching data not successfull.
+### Custom Hooks
+```jsx
+import { useState,useEffect } from "react";
+
+const useFetch = (url) =>{
+
+    const [pending,setPending] = useState(true);
+    const [data , setData] = useState(null);
+    const [error , setError] = useState(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetch(url)
+            .then(res =>{
+                if(!res.ok)
+                {
+                    throw Error('Could not fetch the data....🥺');
+                }
+                return res.json();
+            })
+            .then((data) =>{
+                setData(data);
+                setPending(false);
+                setError(null);
+            })
+            .catch(err => {
+                setError(err.message);
+                setPending(false);
+            })
+        },2000);
+    },[url]);
+
+    return { data,pending,error };
+}
+
+export default useFetch;
+```
+- We previously Seee how to fetch the data fro the server using the useEffect and hooks now we write the custom hooks for the dynaic purpose because in one website we can fetch multiple data fro the json server so we dynamically do
+- So create a jsx file inside the src folder in this file normal as create the function and export it then copy the same use effect and paste it but the url is not same in the all cases so we dynamically deal that so get the url when the component is called that is custom hooks is called then in the fetch put the url also put the dependency place.
+- If we use the static url that time we did not use the url in the place of the dependency but incase of if we use the dynamic url we use the url in the place of dependency the reason is ,
+- he dependency array [url] at the end of the useEffect hook means the effect will run whenever the url changes.This is particularly useful for dynamic data fetching. If we use dynamic url that time it reload to fetch the dat.
+- And in the return type we retur the fetched data and the error pending message as a object.
