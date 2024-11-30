@@ -285,7 +285,7 @@ const [blogs , setBlogs] = useState(null);
 ### Response
 - When we fetch the data the response will return.
 - The response is ok that means the fetching is successfull. That is data fetched successfully.
-<br>
+
 ![image](https://github.com/user-attachments/assets/af0fddf3-63ad-404c-94c9-3b7ec9609aa8)
 - In this image we see the responses it have the url of our local json server and the ok tag that is true means fetching data successfull false means fetching data not successfull.
 ### Custom Hooks
