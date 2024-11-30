@@ -330,3 +330,21 @@ export default useFetch;
 - If we use the static url that time we did not use the url in the place of the dependency but incase of if we use the dynamic url we use the url in the place of dependency the reason is ,
 - he dependency array [url] at the end of the useEffect hook means the effect will run whenever the url changes.This is particularly useful for dynamic data fetching. If we use dynamic url that time it reload to fetch the dat.
 - And in the return type we retur the fetched data and the error pending message as a object.
+### React router 
+#### Header File
+```
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+```
+#### Browser Router:
+- What it is: BrowserRouter is a router implementation that uses the HTML5 history API to keep your UI in sync with the URL.
+- Usage: It wraps your entire application and provides the routing context to child components.
+#### Routes or (Switch in older versions of react):
+- What it is: Routes is a component in react-router-dom v6 and later.
+- Usage: It works similarly to Switch but with improved syntax and additional features. It renders the first child <Route> or <Redirect> that matches the location.
+- Why use it: Routes provide a more flexible and powerful way to handle routing in modern React applications.
+#### Route:
+- What it is: Route is used to define a single route.
+- Usage: It specifies the path and the component to render when the path is matched
+- Differences in v6: Instead of nesting components inside Route, you use the element prop to specify the component to be rendered.
+### Abort Controller:
+- The AbortController and AbortSignal objects provide a way to abort web requests (like fetch) if they are taking too long or if they need to be canceled due to a change in user action. This can help improve the performance and responsiveness of your web applications by preventing unnecessary network requests from being processed.
